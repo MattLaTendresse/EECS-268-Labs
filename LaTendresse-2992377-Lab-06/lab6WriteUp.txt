@@ -1,0 +1,50 @@
+Matt LaTendresse
+4/4/2021
+Lab 6 Write-up
+
+1) ReadMaze class
+
+	private variables:
+		int m_row;	rows
+        int m_col;	columns
+        int m_startR;	starting row
+        int m_startC;	starting column
+        char **m_maze;	2D array of chars
+
+    public methods:
+    	ReadMaze(std::string file);	read in maze from file and call read method
+    	int getRow() const;	return m_row 
+    	int getCol() const;	return m_col
+    	int getStartRow() const;	return m_startR
+    	int getStartCol() const;	return m_startC
+    	void read(std::string file);	use a file to fill a 2D array 
+    	void validParameters();	check if file format is correct
+    	void getMaze(char *maze[]) const;	fill a 2D array from a char *maze[]
+    	void printMaze();	print out th 2D array 
+
+2) MazeWalker class
+
+	private variables:
+		ReadMaze* m_reader;	ReadMaze pointer to declare a maze
+    	char ** m_maze;	2D array of chars to be filled 
+    	int** m_visited;	2D array of ints to counted and printed 
+    	int m_numSteps;	fills array with ints 
+    	int m_row;	rows
+    	int m_col;	cols
+
+    public methods:
+    	MazeWalker(std::string file);	read in a maze and define it
+    	void defineMaze();	create a 2D array of ints 
+    	bool walkMaze(int row, int col);	traverse through the maze using a recursive function to iterate until complete returning true if spot is valid 
+    	void markMaze(int row, int col);	m_numSteps++,set the 2D array entry to m_numSteps
+    	void unmarkMaze(int row, int col);	m_numSteps--, set the 2D array entry to 0
+    	bool isValid(int row, int col);	checks to see if the entry is valid in the array and if is not a wall or already visited
+    	void printSolution();	print out the m_visited array 
+    	void solveMaze();	call the walkMaze method and print 
+
+3) Using if statements in the WalkMaze recursive function, and then calling the walkMaze function again in the if statement, the function will know if backtracking is needed when all if statements have been passed over, checking the possible moves in a clockwise order, then returnning false after. This will cause the function to exit out of the if statement, undoing the move it had done. The visited array will be unMarked, removing the entry that it backtracked on.
+
+4) It will check if the current position is an exit, then it will run the recursive function until there is an 'E' or there is no exit and the recursive function returns false
+
+
+    
